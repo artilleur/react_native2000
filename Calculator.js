@@ -5,7 +5,31 @@ const Calculator = () => {
   const [expression, setExpression] = useState('');
 
   const handleButtonPress = (value) => {
-    setExpression((prevExpression) => prevExpression + value);
+    if (value === '%') {
+      setExpression((prevExpression) => {
+        const lastChar = prevExpression.slice(-1);
+        if (!isNaN(lastChar) || lastChar === ')') {
+          const lastNumberMatch = prevExpression.match(/(\d*\.?\d+)$/);
+          if (lastNumberMatch) {
+            const lastNumber = lastNumberMatch[0];
+            const updatedExpression =
+  prevExpression.slice(0, -lastNumber.length) + lastNumber + '/100*' + prevExpression.slice(0, -lastNumber.length);
+// Supprimer le "+" à la fin s'il y en a un
+return updatedExpression.endsWith('+') ? updatedExpression.slice(0, -1) : updatedExpression;
+          }
+        }
+        return prevExpression;
+      });
+    } else {
+      setExpression((prevExpression) => {
+        const lastChar = prevExpression.slice(-1);
+        // Pour éviter d'ajouter deux signes "+" consécutifs
+        if (value === '+' && (isNaN(lastChar) || lastChar === '+')) {
+          return prevExpression;
+        }
+        return prevExpression + value;
+      });
+    }
   };
 
   const handleClear = () => {
@@ -14,11 +38,19 @@ const Calculator = () => {
 
   const handleEvaluate = () => {
     try {
-      setExpression(eval(expression).toString());
+      // Utilisez la fonction eval uniquement si nécessaire
+      const result = eval(expression);
+      setExpression(result.toString());
     } catch (error) {
       setExpression('Error');
     }
   };
+
+  const handleDelete = () => {
+    setExpression((prevExpression) => prevExpression.slice(0, -1));
+  };
+
+
 
   return (
     <View style={styles.container}>
@@ -39,9 +71,11 @@ const Calculator = () => {
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('/')}>
             <Text style={styles.buttonText}>/</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('(')}>
+            <Text style={styles.buttonText}>(</Text>
+          </TouchableOpacity>
         </View>
-        {/* Ajoutez d'autres rangées et boutons en fonction de vos besoins */}
-        {/* Exemple de deuxième rangée */}
+        {/* ... Ajoutez d'autres rangées en fonction de vos besoins */}
         <View style={styles.row}>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('4')}>
             <Text style={styles.buttonText}>4</Text>
@@ -54,6 +88,9 @@ const Calculator = () => {
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('*')}>
             <Text style={styles.buttonText}>*</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress(')')}>
+            <Text style={styles.buttonText}>)</Text>
           </TouchableOpacity>
         </View>
         {/* ... Ajoutez d'autres rangées en fonction de vos besoins */}
@@ -70,6 +107,9 @@ const Calculator = () => {
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('-')}>
             <Text style={styles.buttonText}>-</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('%')}>
+            <Text style={styles.buttonText}>%</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.row}>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('0')}>
@@ -84,11 +124,17 @@ const Calculator = () => {
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('+')}>
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handleDelete()}>
+            <Text style={styles.buttonText}>R</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
 };
+
+// ...
+
 
 // ...
 const styles = StyleSheet.create({
@@ -99,14 +145,14 @@ const styles = StyleSheet.create({
   },
   display: {
     backgroundColor: '#eee',
-    padding: 10,
+    padding: 20,
     alignItems: 'flex-end',
   },
   expressionText: {
     fontSize: 24,
   },
   buttonsContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: 'cyan',
     width: '80%', // Ajuster la largeur de la calculatrice selon vos besoins
     maxWidth: 400, // Limiter la largeur maximale de la calculatrice
   },
@@ -123,6 +169,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
+    
   },
 });
 // ...
