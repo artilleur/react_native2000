@@ -60,9 +60,7 @@ return updatedExpression.endsWith('+') ? updatedExpression.slice(0, -1) : update
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('7')}>
-            <Text style={styles.buttonText}>7</Text>
-          </TouchableOpacity>
+          
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('8')}>
             <Text style={styles.buttonText}>8</Text>
           </TouchableOpacity>
@@ -70,10 +68,10 @@ return updatedExpression.endsWith('+') ? updatedExpression.slice(0, -1) : update
             <Text style={styles.buttonText}>9</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('/')}>
-            <Text style={styles.buttonText}>/</Text>
+            <Text style={styles.buttonText3}>/</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('(')}>
-            <Text style={styles.buttonText}>(</Text>
+            <Text style={styles.buttonText3}>(</Text>
           </TouchableOpacity>
         </View>
         {/* ... Ajoutez d'autres rangées en fonction de vos besoins */}
@@ -87,11 +85,14 @@ return updatedExpression.endsWith('+') ? updatedExpression.slice(0, -1) : update
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('6')}>
             <Text style={styles.buttonText}>6</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('7')}>
+            <Text style={styles.buttonText}>7</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('*')}>
-            <Text style={styles.buttonText}>*</Text>
+            <Text style={styles.buttonText3}>*</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress(')')}>
-            <Text style={styles.buttonText}>)</Text>
+            <Text style={styles.buttonText3}>)</Text>
           </TouchableOpacity>
         </View>
         {/* ... Ajoutez d'autres rangées en fonction de vos besoins */}
@@ -109,31 +110,31 @@ return updatedExpression.endsWith('+') ? updatedExpression.slice(0, -1) : update
             <Text style={styles.buttonText}>3</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('-')}>
-            <Text style={styles.buttonText}>-</Text>
+            <Text style={styles.buttonText3}>-</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('+')}>
-            <Text style={styles.buttonText}>+</Text>
+            <Text style={styles.buttonText3}>+</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.row}>
           
           <TouchableOpacity style={styles.button} onPress={() => handleClear()}>
-            <Text style={styles.buttonText}>C</Text>
+            <Text style={styles.buttonText2}>C</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleDelete()}>
             <Text style={styles.buttonText2}>del</Text>
           </TouchableOpacity>
          
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('%')}>
-            <Text style={styles.buttonText}>%</Text>
+            <Text style={styles.buttonText3}>%</Text>
           </TouchableOpacity>
           
          
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('.')}>
-          <Text style={styles.buttonText}>.</Text>
+          <Text style={styles.buttonText3}>.</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => handleEvaluate()}>
-            <Text style={styles.buttonText}>=</Text>
+            <Text style={styles.buttonText3}>=</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   buttonsContainer: {
-    backgroundColor: 'cyan',
+    backgroundColor: '#ffdead',
     width: '80%', // Ajuster la largeur de la calculatrice selon vos besoins
     maxWidth: 400, // Limiter la largeur maximale de la calculatrice
   },
@@ -183,6 +184,11 @@ const styles = StyleSheet.create({
   buttonText2: {
     fontSize: 15,
     color:'red',
+  },
+  buttonText3: {
+    fontSize: 30,
+    color : '#ff8c00',
+   
   },
 });
 // ...
