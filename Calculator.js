@@ -125,7 +125,7 @@ return updatedExpression.endsWith('+') ? updatedExpression.slice(0, -1) : update
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleDelete()}>
-            <Text style={styles.buttonText}>R</Text>
+            <Text style={styles.buttonText2}>del</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Centrer horizontalement
   },
   display: {
-    backgroundColor: '#eee',
+    backgroundColor: 'yellows',
     padding: 20,
     alignItems: 'flex-end',
   },
@@ -170,6 +170,10 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     
+  },
+  buttonText2: {
+    fontSize: 15,
+    color:'red',
   },
 });
 // ...
