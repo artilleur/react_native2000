@@ -17,7 +17,8 @@ const Calculator = () => {
 // Supprimer le "+" à la fin s'il y en a un
 return updatedExpression.endsWith('+') ? updatedExpression.slice(0, -1) : updatedExpression;
           }
-        }
+        } 
+
         return prevExpression;
       });
     } else {
@@ -95,6 +96,9 @@ return updatedExpression.endsWith('+') ? updatedExpression.slice(0, -1) : update
         </View>
         {/* ... Ajoutez d'autres rangées en fonction de vos besoins */}
         <View style={styles.row}>
+        <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('0')}>
+            <Text style={styles.buttonText}>0</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('1')}>
             <Text style={styles.buttonText}>1</Text>
           </TouchableOpacity>
@@ -107,25 +111,29 @@ return updatedExpression.endsWith('+') ? updatedExpression.slice(0, -1) : update
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('-')}>
             <Text style={styles.buttonText}>-</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('%')}>
-            <Text style={styles.buttonText}>%</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('0')}>
-            <Text style={styles.buttonText}>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleClear()}>
-            <Text style={styles.buttonText}>C</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleEvaluate()}>
-            <Text style={styles.buttonText}>=</Text>
-          </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('+')}>
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
+        </View>
+        <View style={styles.row}>
+          
+          <TouchableOpacity style={styles.button} onPress={() => handleClear()}>
+            <Text style={styles.buttonText}>C</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => handleDelete()}>
             <Text style={styles.buttonText2}>del</Text>
+          </TouchableOpacity>
+         
+          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('%')}>
+            <Text style={styles.buttonText}>%</Text>
+          </TouchableOpacity>
+          
+         
+          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('.')}>
+          <Text style={styles.buttonText}>.</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => handleEvaluate()}>
+            <Text style={styles.buttonText}>=</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -169,7 +177,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
-    
+    color : 'black',
+   
   },
   buttonText2: {
     fontSize: 15,
